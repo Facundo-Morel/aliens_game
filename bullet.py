@@ -9,7 +9,7 @@ class Bullet(Sprite):
         """Create a bullet object at the ship's current position."""
         super().__init__()
         self.screen = ai_game.screen
-        self.settings = ai_game.settings
+        self.settings = ai_game.bullet_settings
         self.color = self.settings.bullet_color
 
         # Create a bullet rect at (0, 0) and then set correct position.
@@ -32,6 +32,7 @@ class Bullet(Sprite):
         """Draw the bullet to the screen."""
         pygame.draw.rect(self.screen, self.color, self.rect)
 
+
 class Big_Bullet(Sprite):
     """A class to manage bullets fired from the ship"""
 
@@ -39,7 +40,7 @@ class Big_Bullet(Sprite):
         """Create a bullet object at the ship's current position."""
         super().__init__()
         self.screen = ai_game.screen
-        self.settings = ai_game.settings
+        self.settings = ai_game.bullet_settings
         self.color = self.settings.big_bullet_color
 
         # Create a bullet rect at (0, 0) and then set correct position.

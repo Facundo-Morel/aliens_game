@@ -1,6 +1,6 @@
 import sys
 import pygame
-from settings import Settings
+from settings import Settings, Bullets_Settings, Ship_Settings
 from ship import Ship
 from bullet import Bullet, Big_Bullet
 
@@ -11,10 +11,12 @@ class AlienInvasion:
         """Initialize the game, and create game resourses."""
         pygame.init()
         self.settings = Settings()
+        self.bullet_settings = Bullets_Settings()
+        self.ship_settings = Ship_Settings()
 
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        self.settings.screen_height = self.screen .get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -76,13 +78,13 @@ class AlienInvasion:
     
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
-        if len(self.bullets) < self.settings.bullets_allowed:
+        if len(self.bullets) < self.bullet_settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
     def _fire_big_bullet(self):
         """Create a new bullet and add it to the bullets group."""
-        if len(self.big_bullets) < self.settings.big_bullets_allowed:
+        if len(self.big_bullets) < self.bullet_settings.big_bullets_allowed:
             new_big_bullet = Big_Bullet(self)
             self.big_bullets.add(new_big_bullet)
 

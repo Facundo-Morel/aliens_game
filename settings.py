@@ -8,9 +8,19 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (0, 0, 0)
 
+class Ship_Settings:
+    
+    def __init__(self):
+        """Initialize the ship settings."""
+
         # Ship settings
         self.ship_vertical_speed = 0.50
         self.ship_horizontal_speed = 1.5
+
+class Bullets_Settings:
+
+    def __init__(self):
+        """Initialize the bullet's settings."""
 
         # Bullet settings
         self.bullet_speed = 1.0
