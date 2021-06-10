@@ -21,7 +21,7 @@ class Settings:
 
         # Big Bullet settings
         self.big_bullet_speed = 2.0
-        self.big_bullet_width = 6
+        self.big_bullet_width = 30
         self.big_bullet_height = 30
         self.big_bullet_color = (0, 255, 0)
         self.big_bullets_allowed = 3

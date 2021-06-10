@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from big_bullet import Big_Bullet
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
@@ -19,6 +20,7 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.big_bullets = pygame.sprite.Group()
 
 
     def run_game(self):
@@ -29,6 +31,7 @@ class AlienInvasion:
                 self._check_events()
                 self.ship.update()
                 self._update_bullets()
+                self._update_big_bullets()                
                 self._update_screen()
 
                 # Make the mos recently drawn screen visible.
@@ -57,6 +60,9 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_LALT:
+            self._fire_big_bullet()
+
          
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -75,6 +81,12 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _fire_big_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        if len(self.big_bullets) < self.settings.big_bullets_allowed:
+            new_big_bullet = Big_Bullet(self)
+            self.big_bullets.add(new_big_bullet)
+
     def _update_bullets(self):
         """Update the position of bullets and get rid of old bullets."""
         # Update bullet positions.
@@ -85,12 +97,25 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _update_big_bullets(self):
+        """Update the position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.big_bullets.update()
+
+        # Get rid of bullets that have disappeared.
+        for big_bullet in self.big_bullets.copy():
+            if big_bullet.rect.bottom <= 0:
+                self.big_bullets.remove(big_bullet)
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        for big_bullet in self.big_bullets.sprites():
+            big_bullet.draw_big_bullet()
+   
 
 if __name__ == '__main__':
     # Make a ame instance, and run the game.
